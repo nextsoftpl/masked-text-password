@@ -1,0 +1,23 @@
+{
+  "name": "maskedTextPassword",
+  "homepage": "https://github.com/nextsoftpl/maskedTextPassword",
+  "authors": [
+    "nextsoftpl <nextsoft@nextsoft.pl>"
+  ],
+  "description": "Mask html input type text with *, to prevent browser save your password",
+  "main": "maskedTextPassword.jquery.js",
+  "keywords": [
+    "jquery",
+    "masked",
+    "inpu",
+    "password"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
