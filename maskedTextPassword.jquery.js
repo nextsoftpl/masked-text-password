@@ -16,7 +16,7 @@
                 createFinalValue(h.length, p);
             }
             if(!!cb){
-                cb.apply(this, [p.value]);
+                cb.apply(this, [h.join("")]);
             }
         });
 
@@ -35,6 +35,9 @@
                     h.splice(getCursorPosition(p) - 1, 1);
                 }
                 createFinalValue(h.length, p);
+            }
+            if(!!cb){
+                cb.apply(this, [h.join("")]);
             }
         });
 

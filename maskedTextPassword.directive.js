@@ -6,7 +6,7 @@
             restrict: 'A',
             scope: {
                 targetName: '=',
-                beforeSubmit: '&'
+                beforeSubmit: '='
             },
             link: function (scope, element, attrs) {
                 console.log(attrs);
