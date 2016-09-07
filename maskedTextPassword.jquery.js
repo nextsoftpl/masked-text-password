@@ -15,7 +15,9 @@
                 h[getCursorPosition(p)] = key;
                 createFinalValue(h.length, p);
             }
-
+            if(!!cb){
+                cb.apply(this, [p.value]);
+            }
         });
 
         $(this).on('focus', function () {
@@ -32,7 +34,6 @@
                 } else {
                     h.splice(getCursorPosition(p) - 1, 1);
                 }
-                console.log(h.length);
                 createFinalValue(h.length, p);
             }
         });
@@ -44,9 +45,6 @@
             }
             ph = $("#" + tN);
             ph.val(h.join(""));
-            if(!!cb){
-                cb.apply(this, [p.value]);
-            }
         });
 
         function createFinalValue(length, p) {
