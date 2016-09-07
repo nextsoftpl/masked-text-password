@@ -15,7 +15,7 @@
 
                 element.maskedTextPassword(attrs.targetName, function(newValue){
                     console.log('callback', newValue);
-                    attrs.beforeSubmit(newValue);
+                    attrs.beforeSubmit()(newValue);
                     //ngModelCtrl.$setViewValue(picker.getDate());
                 });
 
