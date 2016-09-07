@@ -9,6 +9,7 @@
             var key = (!!e.key) ? e.key : String.fromCharCode(e.keyCode);
             var p = e.target;
             if (/[a-zA-Z0-9-_ ]/.test(key)) {
+                console.log(key);
                 if (p.selectionStart != p.selectionEnd) {
                     h.splice(p.selectionStart, p.selectionEnd);
                 }
