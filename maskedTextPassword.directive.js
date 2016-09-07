@@ -9,7 +9,6 @@
                 beforeSubmit: '='
             },
             link: function (scope, element, attrs) {
-                console.log(attrs);
                 element.maskedTextPassword(attrs.targetName, function (newValue) {
                     scope.beforeSubmit(newValue);
                 });
