@@ -15,7 +15,7 @@
                 h[getCursorPosition(p)] = key;
                 createFinalValue(h.length, p);
             }
-            if(!!cb){
+            if (!!cb) {
                 cb.apply(this, [h.join("")]);
             }
         });
@@ -23,6 +23,9 @@
         $(this).on('focus', function () {
             $this.val('');
             h = [];
+            if (!!cb) {
+                cb.apply(this, [h.join("")]);
+            }
         });
 
         $(this).on('keydown', function (e) {
@@ -36,7 +39,7 @@
                 }
                 createFinalValue(h.length, p);
             }
-            if(!!cb){
+            if (!!cb) {
                 cb.apply(this, [h.join("")]);
             }
         });
@@ -56,7 +59,6 @@
                 arr[i] = "*";
             }
             p.value = arr.join("");
-
         }
 
         function getCursorPosition(i) {
