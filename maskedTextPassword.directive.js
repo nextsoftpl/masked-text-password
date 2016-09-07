@@ -4,12 +4,11 @@
     function maskedTextPassword(){
         return {
             restrict: 'A',
-            require: 'ngModel',
             scope: {
                 targetName: '=',
                 beforeSubmit: '&'
             },
-            link: function (scope, element, attrs, ngModelCtrl) {
+            link: function (scope, element, attrs) {
                 console.log(attrs);
 
 
