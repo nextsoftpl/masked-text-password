@@ -5,13 +5,13 @@
         var $this = $(this);
 
         $(this).on('keypress', function (e) {
-            e.preventDefault();
+            //e.preventDefault();
             var key = (!!e.key) ? e.key : String.fromCharCode(e.keyCode);
             var p = e.target;
-            if (p.selectionStart != p.selectionEnd) {
-                h.splice(p.selectionStart, p.selectionEnd);
-            }
             if (/[a-zA-Z0-9-_ ]/.test(key)) {
+                if (p.selectionStart != p.selectionEnd) {
+                    h.splice(p.selectionStart, p.selectionEnd);
+                }
                 h[getCursorPosition(p)] = key;
                 createFinalValue(h.length, p);
                 if (!!cb) {
