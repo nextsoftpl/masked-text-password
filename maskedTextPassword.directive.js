@@ -1,4 +1,4 @@
-(function(angular){
+(function(window, angular){
     'use strict';
     angular.module('nextsoft-directives', []).directive('maskedTextPassword', maskedTextPassword);
     function maskedTextPassword(){
@@ -28,4 +28,4 @@
         };
     }
 
-})();
+})(window, window.angular);
