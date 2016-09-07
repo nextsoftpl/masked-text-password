@@ -10,10 +10,9 @@
             },
             link: function (scope, element, attrs) {
                 console.log(attrs);
-
                 element.maskedTextPassword(attrs.targetName, function(newValue){
                     console.log('callback', newValue);
-                    attrs.beforeSubmit()(newValue);
+                    scope.beforeSubmit(newValue);
                     //ngModelCtrl.$setViewValue(picker.getDate());
                 });
 
