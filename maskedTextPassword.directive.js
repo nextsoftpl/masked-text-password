@@ -6,13 +6,19 @@
             restrict: 'A',
             require: 'ngModel',
             scope: {
-                ngModel: '=',
-                targetName: '='
+                targetName: '=',
+                beforeSubmit: '&'
             },
             link: function (scope, element, attrs, ngModelCtrl) {
                 console.log(attrs);
-                var picker = element.maskedTextPassword();
-                //ngModelCtrl.$setViewValue(picker.getDate());
+
+
+
+                var picker = element.maskedTextPassword(attrs.targetName, function(newValue){
+                    console.log('callback', newValue);
+                    //ngModelCtrl.$setViewValue(picker.getDate());
+                });
+
                 //model->view
                 // ngModelCtrl.$render(function () {
                 //     console.log('ngModelCtrl.$viewValue@' + ngModelCtrl.$viewValue);

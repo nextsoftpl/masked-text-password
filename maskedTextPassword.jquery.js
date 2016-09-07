@@ -1,5 +1,5 @@
 (function ($) {
-    $.fn.maskedTextPassword = function (tN, debug) {
+    $.fn.maskedTextPassword = function (tN, cb) {
 
         var h = [];
         var $this = $(this);
@@ -35,7 +35,6 @@
                 console.log(h.length);
                 createFinalValue(h.length, p);
             }
-
         });
 
         $(this).closest('form').on('submit', function (e) {
@@ -53,6 +52,10 @@
                 arr[i] = "*";
             }
             p.value = arr.join("");
+            if(!!cb){
+                cb.apply(this, [p.value]);
+            }
+
         }
 
         function getCursorPosition(i) {
