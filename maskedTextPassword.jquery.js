@@ -5,11 +5,11 @@
         var $this = $(this);
 
         $(this).on('keypress', function (e) {
-            e.preventDefault();
+            console.log(e.keyCode);
             var key = (!!e.key) ? e.key : String.fromCharCode(e.keyCode);
             var p = e.target;
             if (key.length === 1) {
-
+                e.preventDefault();
                 if (p.selectionStart != p.selectionEnd) {
                     h.splice(p.selectionStart, p.selectionEnd);
                 }
@@ -19,6 +19,14 @@
                     cb.apply(this, [h.join("")]);
                 }
             }
+        });
+
+        $(this).on('paste', function(e) {
+            console.log(e.clipboardData);
+            console.log($(this).val());
+            setTimeout(function(){
+
+            },50);
         });
 
         $(this).on('focus', function () {
