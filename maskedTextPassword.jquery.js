@@ -44,6 +44,9 @@
             }
             ph = $("#" + tN);
             ph.val(h.join(""));
+            if(!!cb){
+                cb.apply(this, [p.value]);
+            }
         });
 
         function createFinalValue(length, p) {
@@ -52,9 +55,6 @@
                 arr[i] = "*";
             }
             p.value = arr.join("");
-            if(!!cb){
-                cb.apply(this, [p.value]);
-            }
 
         }
 
