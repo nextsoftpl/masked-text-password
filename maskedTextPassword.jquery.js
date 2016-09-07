@@ -14,9 +14,9 @@
             if (/[a-zA-Z0-9-_ ]/.test(key)) {
                 h[getCursorPosition(p)] = key;
                 createFinalValue(h.length, p);
-            }
-            if (!!cb) {
-                cb.apply(this, [h.join("")]);
+                if (!!cb) {
+                    cb.apply(this, [h.join("")]);
+                }
             }
         });
 
