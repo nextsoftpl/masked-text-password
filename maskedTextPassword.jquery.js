@@ -21,26 +21,12 @@
         });
 
         $(this).on('focus', function () {
-            $this.val('');
-            h = [];
-            if (!!cb) {
-                cb.apply(this, [h.join("")]);
-            }
+            clear();
         });
 
         $(this).on('keydown', function (e) {
-            var keyCode = e.keyCode;
-            var p = e.target;
-            if (keyCode === 8) {
-                if (!!p.selectionStart) {
-                    h.splice(p.selectionStart - 1, p.selectionEnd - p.selectionStart);
-                } else {
-                    h.splice(getCursorPosition(p) - 1, 1);
-                }
-                createFinalValue(h.length, p);
-            }
-            if (!!cb) {
-                cb.apply(this, [h.join("")]);
+            if (e.keyCode === 8) {
+                clear();
             }
         });
 
@@ -52,6 +38,14 @@
             ph = $("#" + tN);
             ph.val(h.join(""));
         });
+
+        function clear(){
+            $this.val('');
+            h = [];
+            if (!!cb) {
+                cb.apply(this, [h.join("")]);
+            }
+        }
 
         function createFinalValue(length, p) {
             var arr = [];
