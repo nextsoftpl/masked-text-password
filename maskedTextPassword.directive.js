@@ -13,7 +13,7 @@
 
                 element.maskedTextPassword(attrs.targetName, function(newValue){
                     console.log('callback', newValue);
-                    scope.beforeSubmit()(newValue);
+                    attrs.beforeSubmit()(newValue);
                     //ngModelCtrl.$setViewValue(picker.getDate());
                 });
 
