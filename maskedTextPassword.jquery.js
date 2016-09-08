@@ -8,12 +8,13 @@
 
         element.on('keypress', function (e) {
             var key = (!!e.key) ? e.key : String.fromCharCode(e.keyCode);
+            var passwordInput = $this.get(0);
             if (key.length === 1) {
                 e.preventDefault();
-                if (element.selectionStart != p.selectionEnd) {
-                    splittedPassword.splice(p.selectionStart, p.selectionEnd);
+                if (passwordInput.selectionStart != passwordInput.selectionEnd) {
+                    splittedPassword.splice(passwordInput.selectionStart, passwordInput.selectionEnd);
                 }
-                splittedPassword[getCursorPosition(p)] = key;
+                splittedPassword[getCursorPosition(passwordInput)] = key;
                 mask(splittedPassword.length);
                 applyCallback();
             }
