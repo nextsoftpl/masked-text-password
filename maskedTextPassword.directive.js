@@ -9,7 +9,7 @@
                 beforeSubmit: '='
             },
             link: function (scope, element, attrs) {
-                element.maskedTextPassword(attrs.targetName, function (newValue) {
+                element.maskedTextPassword(function (newValue) {
                     scope.beforeSubmit(newValue);
                 });
             }

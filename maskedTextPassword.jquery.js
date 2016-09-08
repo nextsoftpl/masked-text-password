@@ -8,7 +8,7 @@
 
         element.on('keypress', function (e) {
             var key = (!!e.key) ? e.key : String.fromCharCode(e.keyCode);
-            var passwordInput = $this.get(0);
+            var passwordInput = element.get(0);
             if (key.length === 1) {
                 e.preventDefault();
                 if (passwordInput.selectionStart != passwordInput.selectionEnd) {
@@ -75,9 +75,11 @@
         }
 
         function mask(length) {
-            element.val(new Array(length).map(function () {
-                return "*";
-            }).join(""));
+            var arr = new Array(length);
+            for(var i = 0; i < arr.length; i++){
+                arr[i] = "*";
+            }
+            element.val(arr.join(""));
         }
 
         function getCursorPosition(input) {
