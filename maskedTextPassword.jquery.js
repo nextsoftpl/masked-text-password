@@ -22,6 +22,8 @@
 
         element.on('paste', function (e) {
             e.preventDefault();
+            console.log(e.originalEvent.clipboardData);
+            console.log(e.originalEvent);
             var pastedText = e.originalEvent.clipboardData.getData('text');
             splittedPassword = pastedText.split("");
             mask(splittedPassword.length);
@@ -37,8 +39,8 @@
                 clear();
             }
             /*else if (e.keyCode === 13) {
-                parentForm.submit();
-            }*/
+             parentForm.submit();
+             }*/
         });
 
 
