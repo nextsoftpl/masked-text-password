@@ -1,84 +1,92 @@
 (function ($) {
-    $.fn.maskedTextPassword = function (tN, cb) {
+    $.fn.maskedTextPassword = function (arg) {
 
-        var h = [];
-        var $this = $(this);
-        var parentForm = $(this).closest('form');
+        var splittedPassword = [];
+        var element = $(this);
+        var callback;
+        checkArguments();
 
-        $this.on('keypress', function (e) {
-            console.log(e.keyCode);
+        element.on('keypress', function (e) {
             var key = (!!e.key) ? e.key : String.fromCharCode(e.keyCode);
-            var p = e.target;
             if (key.length === 1) {
                 e.preventDefault();
-                if (p.selectionStart != p.selectionEnd) {
-                    h.splice(p.selectionStart, p.selectionEnd);
+                if (element.selectionStart != p.selectionEnd) {
+                    splittedPassword.splice(p.selectionStart, p.selectionEnd);
                 }
-                h[getCursorPosition(p)] = key;
-                mask(h.length);
+                splittedPassword[getCursorPosition(p)] = key;
+                mask(splittedPassword.length);
                 applyCallback();
             }
         });
 
-        $this.on('paste', function (e) {
+        element.on('paste', function (e) {
             e.preventDefault();
             var pastedText = e.originalEvent.clipboardData.getData('text');
-            h = pastedText.split("");
-            mask(h.length);
+            splittedPassword = pastedText.split("");
+            mask(splittedPassword.length);
             applyCallback();
         });
 
-        $this.on('focus', function () {
+        element.on('focus', function () {
             clear();
         });
 
-        $this.on('keydown', function (e) {
+        element.on('keydown', function (e) {
             if (e.keyCode === 8) {
                 clear();
             }
-            else if (e.keyCode === 13) {
+            /*else if (e.keyCode === 13) {
                 parentForm.submit();
-            }
+            }*/
         });
 
-        parentForm.on('submit', function (e) {
-            var ph = $("#" + tN);
-            if (!ph.length) {
-                $(this).append('<input type="hidden" name="' + tN + '" id="' + tN + '" />');
+
+        function bindOnSubmit(){
+            element.closest('form').on('submit', function () {
+                var targetId = "#" + arg;
+                var hiddenPasswordInput = $(targetId);
+                if (!hiddenPasswordInput.length) {
+                    $(this).append('<input type="hidden" name="' + arg + '" id="' + arg + '" />');
+                }
+                hiddenPasswordInput = $(targetId);
+                hiddenPasswordInput.val(splittedPassword.join(""));
+            });
+        }
+
+        function checkArguments(){
+            if(typeof arg === 'function'){
+                callback = arg;
+            }else{
+                bindOnSubmit();
             }
-            ph = $("#" + tN);
-            ph.val(h.join(""));
-        });
+        }
 
         function clear() {
-            $this.val('');
-            h = [];
+            element.val('');
+            splittedPassword = [];
             applyCallback();
         }
 
-        function applyCallback(){
-            if (!!cb) {
-                cb.apply(this, [h.join("")]);
+        function applyCallback() {
+            if (!!callback) {
+                callback.apply(this, [splittedPassword.join("")]);
             }
         }
 
         function mask(length) {
-            var arr = [];
-            for (var i = 0; i < length; i++) {
-                arr[i] = "*";
-            }
-            $this.val(arr.join(""));
+            element.val(new Array(length).map(function () {
+                return "*";
+            }).join(""));
         }
 
-        function getCursorPosition(i) {
-            if (!i) return;
-            if ('selectionStart' in i) {
-                return i.selectionStart;
+        function getCursorPosition(input) {
+            if ('selectionStart' in input) {
+                return input.selectionStart;
             } else if (document.selection) {
-                i.focus();
+                input.focus();
                 var s = document.selection.createRange();
                 var sL = document.selection.createRange().text.length;
-                s.moveStart('character', -i.value.length);
+                s.moveStart('character', -input.value.length);
                 return s.text.length - sL;
             }
         }
