@@ -24,6 +24,7 @@
             e.preventDefault();
             console.log(e.originalEvent.clipboardData);
             console.log(e.originalEvent);
+            console.log(window.clipboardData);
             var pastedText = e.originalEvent.clipboardData.getData('text');
             splittedPassword = pastedText.split("");
             mask(splittedPassword.length);
