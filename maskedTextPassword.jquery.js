@@ -22,10 +22,9 @@
 
         element.on('paste', function (e) {
             e.preventDefault();
-            console.log(e.originalEvent.clipboardData);
-            console.log(e.originalEvent);
-            console.log(window.clipboardData);
-            var pastedText = e.originalEvent.clipboardData.getData('text');
+            var clipboardData = window.clipboardData || e.originalEvent.clipboardData;
+            console.log(clipboardData);
+            var pastedText = clipboardData.getData('text');
             splittedPassword = pastedText.split("");
             mask(splittedPassword.length);
             applyCallback();
